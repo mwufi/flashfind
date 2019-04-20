@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TreeView from './components/TreeView';
 import './App.css';
-import long from './examples.js';
+import pages from './examples.js';
 
 class App extends Component {
   constructor() {
@@ -13,9 +13,9 @@ class App extends Component {
     this.root = null;
 
     var parser = new DOMParser();
-    var doc = parser.parseFromString(long, "text/html").body;
+    var doc = parser.parseFromString(pages[1], "text/html").body;
     this.state = ({
-      string: long,
+      string: pages[1],
       doc: doc,
       currentElement: doc
     });
@@ -93,7 +93,7 @@ class App extends Component {
             <button onClick={this.showHTML}> Show HTML </button>
           </div>
           <div className="column">
-            <TreeView tree={currentElement}/>
+            <TreeView tree={this.state.doc} highlight={currentElement}/>
           </div>
         </header>
       </div>
