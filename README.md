@@ -7,10 +7,22 @@ The goal of this project is to build a tool to explore CSS+HTML faster.
 * Explore the elements you're interested in
 
 # Current Prototype
+
+* Navigate with `j`,`k`,`h`,`l` (to move to parent/child and adjacent DOM nodes)
+
 ![](https://github.com/mwufi/flashfind/raw/master/screenshots/Screen%20Shot%202019-04-20%20at%203.32.16%20AM.png)
 
-# Contributing!
+How does it work right now? WE have an `iframe` and a `TreeView`, which both render a raw HTML DOM.
 
+# Contribute!
+
+## Design
+
+What's the most helpful things you wish you could do with devtools?
+
+For me, it'd involve getting components used in a webpage, and seeing their HTML/CSS in a way that allows me to get a sense of the design system.
+
+## Build
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
