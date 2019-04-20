@@ -58,8 +58,8 @@ class TreeView extends Component {
       return <pre className="TreeView" onClick={this.expand}> {tree} </pre>;
     }
 
-    if (!tree.children) {
-      return <pre className="TreeView" onClick={this.expand}> {format(tree)}</pre>;
+    if (!tree.children || tree.children.length < 1) {
+      return <pre className="TreeView" onClick={this.expand}> - {format(tree)}</pre>;
     }
 
     if (collapsed) {
