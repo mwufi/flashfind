@@ -6,9 +6,6 @@ The goal of this project is to build a tool to explore CSS+HTML faster.
 * Navigate different sub-sections of the DOM
 * Explore the elements you're interested in
 
-# Screenshots
-
-4/20/19
 ![](https://github.com/mwufi/flashfind/raw/master/screenshots/Screen%20Shot%202019-04-20%20at%203.32.16%20AM.png)
 
 # Contributing!
