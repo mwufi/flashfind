@@ -1,0 +1,15 @@
+.TreeView {
+    background-color: rgb(101, 116, 101);
+    border-radius: 2px;
+    padding: 0.4em;
+    margin: 0.4em;
+    width: 70%;
+    position: relative;
+
+    font-size: 14px;
+    text-align: left;
+    white-space: pre-line;
+}
+.TreeViewChildren {
+    margin-left: 10px;
+}

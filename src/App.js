@@ -1,24 +1,100 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import TreeView from './components/TreeView';
 import './App.css';
+import long from './examples.js';
 
 class App extends Component {
+  constructor() {
+    super();
+
+    this.showHTML = this.showHTML.bind(this);
+    this.onKeyPress = this.onKeyPress.bind(this);
+
+    this.root = null;
+
+    var parser = new DOMParser();
+    var doc = parser.parseFromString(long, "text/html").body;
+    this.state = ({
+      string: long,
+      doc: doc,
+      currentElement: doc
+    });
+  }
+
+
+  onKeyPress(event) {
+    const { currentElement } = this.state;
+    switch (event.key) {
+      case 'l':
+        if (currentElement.children.length) {
+          this.setState(
+            {
+              ...this.state,
+              currentElement: currentElement.children[0]
+            });
+        }
+        break;
+      case 'h':
+        if (currentElement.tagName !== "BODY") {
+          this.setState(
+            {
+              ...this.state,
+              currentElement: currentElement.parentNode
+            });
+        }
+        break;
+      case 'k':
+      if(currentElement.previousElementSibling){
+
+        this.setState(
+          {
+            ...this.state,
+            currentElement: currentElement.previousElementSibling
+          });
+      }
+        break;
+      case 'j':
+      if(currentElement.nextElementSibling){
+        this.setState(
+          {
+            ...this.state,
+            currentElement: currentElement.nextElementSibling
+          });
+        }
+        break;
+      default:
+        break;
+    }
+  }
+
+  showHTML() {
+    const iframe = document.getElementById('iframe');
+    if(iframe && this.state.currentElement){
+      const doc = iframe.contentWindow.document;
+      doc.body.innerHTML = this.state.currentElement.outerHTML;
+    }
+  }
+
+  componentDidMount() {
+    this.root.focus();
+    this.showHTML();
+  }
+
   render() {
+    const { currentElement } = this.state;
+
+    this.showHTML();
+
     return (
-      <div className="App">
+      <div className="App" onKeyPress={this.onKeyPress} ref={c => (this.root = c)} tabIndex="-1">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          <div className="column">
+            <iframe ref={c => (this.iframe = c)} title="no" id="iframe" />
+            <button onClick={this.showHTML}> Show HTML </button>
+          </div>
+          <div className="column">
+            <TreeView tree={currentElement}/>
+          </div>
         </header>
       </div>
     );
